@@ -15,3 +15,10 @@ Kodowanie LZW
 - gamma
 - omega
 - kodowanie Fibonacciego
+
+## Lista 4
+
+Predykatory JPEG-LS
+- 7 standardowych
+- nowy standard
+- 
