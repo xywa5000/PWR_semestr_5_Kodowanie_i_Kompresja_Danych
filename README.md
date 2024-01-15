@@ -21,4 +21,7 @@ Kodowanie LZW
 Predykatory JPEG-LS
 - 7 standardowych
 - nowy standard
-- 
+
+## Lista 5
+
+Kwantyzacja
