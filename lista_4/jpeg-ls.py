@@ -72,17 +72,19 @@ def compute_entropy(frequency, size):
     return -sum((v / size) * (log2(v) - log2(size)) for v in frequency if v > 0)
 
 def create_predicates():
+    # Funkcja zwracająca listę predyktorów
     return [
-        lambda x, y, z: x,
-        lambda x, y, z: y,
-        lambda x, y, z: z,
-        lambda x, y, z: x + y - z,
-        lambda x, y, z: x + (y - z) / 2,
-        lambda x, y, z: y + (x - z) / 2,
-        lambda x, y, z: (x + y) / 2,
-        lambda x, y, z: new_standard(x, y, z)
+        lambda x, y, z: x,  # Predyktor A (przewidywanie wartości na podstawie poprzedniego piksela w danym kanale)
+        lambda x, y, z: y,  # Predyktor B (przewidywanie wartości na podstawie poprzedniego piksela wertykalnego)
+        lambda x, y, z: z,  # Predyktor C (przewidywanie wartości na podstawie poprzedniego piksela poziomego)
+        lambda x, y, z: x + y - z,  # Predyktor A + B - C
+        lambda x, y, z: x + (y - z) / 2,  # Predyktor A + (B - C)/2
+        lambda x, y, z: y + (x - z) / 2,  # Predyktor B + (A - C)/2
+        lambda x, y, z: (x + y) / 2,  # Predyktor (A + B)/2
+        lambda x, y, z: new_standard(x, y, z)  # Nowy standard (funkcja new_standard określająca wartość piksela)
     ]
 
+# Funkcja określająca wartość piksela na podstawie trzech wartości poprzednich pikseli
 def new_standard(x, y, z):
     maximum = max(y, z)
     return maximum if x > maximum else min(y, z) if x <= min(y, z) else z + y - x
