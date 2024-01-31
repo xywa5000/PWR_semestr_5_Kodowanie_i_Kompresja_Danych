@@ -72,19 +72,17 @@ def compute_entropy(frequency, size):
     return -sum((v / size) * (log2(v) - log2(size)) for v in frequency if v > 0)
 
 def create_predicates():
-    # Funkcja zwracająca listę predyktorów
     return [
-        lambda x, y, z: x,  # Predyktor A (przewidywanie wartości na podstawie poprzedniego piksela w danym kanale)
-        lambda x, y, z: y,  # Predyktor B (przewidywanie wartości na podstawie poprzedniego piksela wertykalnego)
-        lambda x, y, z: z,  # Predyktor C (przewidywanie wartości na podstawie poprzedniego piksela poziomego)
-        lambda x, y, z: x + y - z,  # Predyktor A + B - C
-        lambda x, y, z: x + (y - z) / 2,  # Predyktor A + (B - C)/2
-        lambda x, y, z: y + (x - z) / 2,  # Predyktor B + (A - C)/2
-        lambda x, y, z: (x + y) / 2,  # Predyktor (A + B)/2
-        lambda x, y, z: new_standard(x, y, z)  # Nowy standard (funkcja new_standard określająca wartość piksela)
+        lambda x, y, z: x,
+        lambda x, y, z: y,
+        lambda x, y, z: z,
+        lambda x, y, z: x + y - z,
+        lambda x, y, z: x + (y - z) / 2,
+        lambda x, y, z: y + (x - z) / 2,
+        lambda x, y, z: (x + y) / 2,
+        lambda x, y, z: new_standard(x, y, z)
     ]
 
-# Funkcja określająca wartość piksela na podstawie trzech wartości poprzednich pikseli
 def new_standard(x, y, z):
     maximum = max(y, z)
     return maximum if x > maximum else min(y, z) if x <= min(y, z) else z + y - x
@@ -121,10 +119,16 @@ def analyze_image(image_analysis: ImageAnalysis):
             compute_entropy(image_analysis.significant_counts, image_analysis.get_total_significant_counts())
         ]
 
+        print(f"{i}: total: {current_entropy[3]}")
+        print(f"{i}: red  : {current_entropy[0]}")
+        print(f"{i}: green: {current_entropy[1]}")
+        print(f"{i}: blue : {current_entropy[2]}")
+
         for j in range(len(best_entropy)):
             if current_entropy[j] < best_entropy[j]:
                 best_entropy[j] = current_entropy[j]
                 best_func[j] = i
+    print("")
 
     print_final_results(best_entropy, best_func)
 
@@ -135,14 +139,16 @@ def update_best_results(func_idx: int, current_entropy: List, best_entropy: List
             best_func[i] = func_idx
 
 def show_data_analysis(image_analysis: ImageAnalysis):
+    print("File stats:")
     print("File entropy : ", compute_entropy(image_analysis.significant_counts, image_analysis.get_total_significant_counts()))
     print("Red entropy : ", compute_entropy(image_analysis.rgb_matrix[0], image_analysis.rgb_counts[0]))
     print("Green entropy : ", compute_entropy(image_analysis.rgb_matrix[1], image_analysis.rgb_counts[1]))
     print("Blue entropy : ", compute_entropy(image_analysis.rgb_matrix[2], image_analysis.rgb_counts[2]))
+    print("")
 
 def print_final_results(best_results: List, best_func: List):
     print("Function numbering is as follows:")
-    print("0. A\n1. B\n2. C\n3. A+B-C\n4. A+(B-C)/2\n5. B+(A-C)/2\n6. (A+B)/2\n7. New standard")
+    print("0. A\n1. B\n2. C\n3. A+B-C\n4. A+(B-C)/2\n5. B+(A-C)/2\n6. (A+B)/2\n7. New standard\n")
     print("Best file  [", best_func[3], "] : ", best_results[3])
     print("Best red   [", best_func[0], "] : ", best_results[0])
     print("Best green [", best_func[1], "] : ", best_results[1])
