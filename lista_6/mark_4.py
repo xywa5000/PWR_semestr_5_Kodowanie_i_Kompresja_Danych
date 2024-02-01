@@ -171,21 +171,6 @@ def differential_quantizer(diffs, k):
 
     return quantized_diffs
 
-def differential_encoding_v2(bitmap):
-    # Funkcja kodująca różnice pikseli
-    encoded_bitmap = []
-    for row in bitmap:
-        encoded_row = []
-        for pixel in row:
-            encoded_pixel = Pixel(
-                encode_difference(pixel.r),
-                encode_difference(pixel.g),
-                encode_difference(pixel.b)
-            )
-            encoded_row.append(encoded_pixel)
-        encoded_bitmap.append(encoded_row)
-    return encoded_bitmap
-
 
 def encode_difference(value):
     # Ograniczenie wartości do zakresu 0-255
