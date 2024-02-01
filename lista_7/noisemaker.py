@@ -7,7 +7,7 @@ def swap(bit):
     """
     return "1" if bit == "0" else "0"
 
-def make_some_noise(input_file, output_file, p):
+def add_noise(input_file, output_file, p):
     """
     Funkcja dodająca losowy szum do danych binarnych.
     """
@@ -47,7 +47,8 @@ def main():
         input_file = argv[2] # Nazwa pliku wejściowego
         output_file = argv[3] # Nazwa pliku wyjściowego
 
-        make_some_noise(input_file, output_file, p)
+        add_noise(input_file, output_file, p)
+        print("Added random noise.")
     else:
         print("Error! Usage: python comparator.py <probability - (0.0; 1.0)> <input_file> <output_file>")
 

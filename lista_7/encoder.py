@@ -55,6 +55,7 @@ def main():
             # Konwersja zakodowanego ciągu bitowego z powrotem na dane binarne i zapis do pliku wyjściowego
             b = bytes(int(result[i : i + 8], 2) for i in range(0, len(result), 8))
             output.write(b)
+            print("Encoded.")
     else:
         print("Error! Usage: python encoder.py <input_file> <output_file>")
 
