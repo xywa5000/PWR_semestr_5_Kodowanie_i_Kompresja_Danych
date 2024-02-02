@@ -1,6 +1,7 @@
 import numpy as np
 from PIL import Image
 import argparse
+import math
 
 
 def calculate_mean_squared_error(original, reconstructed):
@@ -9,8 +10,11 @@ def calculate_mean_squared_error(original, reconstructed):
 
 def calculate_signal_to_noise_ratio(original, mse):
     signal_power = np.var(original)
-    snr = 10 * np.log10(signal_power / mse)
-    return snr
+    if mse != 0:
+        snr = 10 * np.log10(signal_power / mse)
+        return snr
+    else:
+        return math.inf
 
 def calculate_metrics_per_channel(original, reconstructed):
     metrics = {}
