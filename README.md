@@ -1,5 +1,11 @@
 # PWR_semestr_5_Kodowanie_i_Kompresja_Danych
 
+Politechnika Wrocławska\
+Wydział Informatyki i Telekomunikacji - W04\
+Informatyka Algorytmiczna\
+Semestr 5 - zimowy 2023/24\
+Obliczenia Naukowe
+
 ## Lista 1
 
 Entropia i entropia warunkowa podanego pliku.\
