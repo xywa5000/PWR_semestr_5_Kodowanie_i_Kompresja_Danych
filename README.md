@@ -4,7 +4,7 @@ Politechnika Wrocławska\
 Wydział Informatyki i Telekomunikacji - W04\
 Informatyka Algorytmiczna\
 Semestr 5 - zimowy 2023/24\
-Obliczenia Naukowe
+Kodowanie i Kompresja Danych
 
 ## Lista 1
 
